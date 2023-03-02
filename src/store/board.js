@@ -1,12 +1,14 @@
 import {flow, getParent, types} from "mobx-state-tree";
 import apiCall from '../api'
+import {User} from "./users";
+// import {User} from "../components/common/User";
 
 
 const Task = types.model('Task', {
     id: types.identifier,
     title: types.string,
     description: types.string,
-    assignee: types.string
+    assignee: types.safeReference(User)
 })
 
 const BoardSection = types.model('BoardSection', {
@@ -35,7 +37,7 @@ const Board = types.model('Board', {
 })
 
 const BoardStore = types.model('BoardStore', {
-    boards: types.array(Board),
+    boards: types.optional( types.array(Board), []),
     active: types.safeReference(Board)
 }).actions(self => {
     return {
@@ -47,6 +49,10 @@ const BoardStore = types.model('BoardStore', {
             self.load()
         }
     }
-})
+}).views(self =>({
+    get list(){
+        return self.boards.map(({id, title}) => ({id, title}))
+    }
+}))
 
 export default BoardStore

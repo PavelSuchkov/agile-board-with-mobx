@@ -19,10 +19,10 @@ const Dashboard = () => {
 
 
     return (
-        <Box p={2}>
+        <Box p={3} style={{margin: 15}}>
             <DragDropContext onDragEnd={() => {
             }}>
-                <Grid container spacing={3}>
+                <Grid container spacing={2} >
                     {boards.active?.sections?.map(section => {
                         return (
                             <Grid item key={section.id} xs>
