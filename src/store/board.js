@@ -1,4 +1,4 @@
-import {flow, getParent, types} from "mobx-state-tree";
+import {flow, getParent, getSnapshot, types} from "mobx-state-tree";
 import apiCall from '../api'
 import {User} from "./users";
 // import {User} from "../components/common/User";
@@ -34,6 +34,23 @@ const Board = types.model('Board', {
     id: types.identifier,
     title: types.string,
     sections: types.array(BoardSection)
+}).actions(self => {
+    return {
+        moveTask(id, source, destination){
+            // debugger
+            const fromSection = self.sections.find(section => section.id === source.droppableId)
+            console.log("fromSection ====>", getSnapshot(fromSection));
+            const toSection = self.sections.find(section => section.id === destination.droppableId)
+            console.log("toSection ====>", getSnapshot(toSection));
+
+            const taskMoveIndex = fromSection.tasks.findIndex(task => task.id === id)
+
+            console.log("taskMoveIndex ====>", taskMoveIndex);
+            const [task] = fromSection.tasks.splice(taskMoveIndex, 1)
+            console.log("task ====>", getSnapshot(task));
+            toSection.tasks.splice(destination.index, 0, task.toJSON())
+        }
+    }
 })
 
 const BoardStore = types.model('BoardStore', {

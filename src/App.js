@@ -9,7 +9,7 @@ function App() {
     const {users, boards} = useStore()
 
     // console.log('users ===> ',users.toJSON())
-    console.log('tasks ===> ', boards.active?.sections[0]?.tasks && getSnapshot(boards))
+    // console.log('tasks ===> ', boards.active?.sections[0]?.tasks && getSnapshot(boards))
 
     return (
         <>
