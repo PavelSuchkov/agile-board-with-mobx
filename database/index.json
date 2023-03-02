@@ -3,7 +3,7 @@
     {
       "id": "1",
       "createdAt": "2021-02-06T18:30:57.479Z",
-      "name": "Abbey Howe",
+      "name": "Pavel Suchkou",
       "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
@@ -118,7 +118,7 @@
   "me": {
     "id": "1",
     "createdAt": "2021-02-06T18:30:57.479Z",
-    "name": "Abbey Howe",
+    "name": "Pavel Suchkou",
     "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
   },
   "board_main_tasks": [

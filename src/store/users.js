@@ -8,12 +8,16 @@ const User = types.model('User', {
     avatar: types.string
 })
 
+const ActiveUser = User.named('ActiveUser')
+
 const UsersStore = types.model('UsersStore', {
-    users: types.maybe( types.array(User))  // may be undefined
+    users: types.maybe( types.array(User)),  // may be undefined
+    me: types.maybe( ActiveUser)             // may be undefined
 }).actions(self => {
     return {
         load: flow( function* (){
             self.users = yield apiCall.get('users')
+            self.me = yield apiCall.get('me')
         }),
         afterCreate(){
             self.load()
